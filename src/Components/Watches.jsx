@@ -21,7 +21,7 @@ const Watches = () => {
     };
     loadData();
   }, []);
-  console.log(watches);
+  // console.log(watches);
   return (
     <div>
       <h3>Watches: {watches.length}</h3>
