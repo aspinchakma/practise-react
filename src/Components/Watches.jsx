@@ -23,8 +23,41 @@ const Watches = () => {
     loadData();
   }, []);
   const handleBuyButton = (watch) => {
-    // check to existing watch
-    console.log(watch);
+    //check data on local storage
+    const isExistionShoppingCart = localStorage.getItem("cart");
+
+    // if shopping cart not existion
+    if (!isExistionShoppingCart) {
+      const newCart = [{ ...watch }];
+      // state
+      setCart(newCart);
+      const newCartStringify = JSON.stringify(newCart);
+      localStorage.setItem("cart", newCartStringify);
+    }
+
+    // shopping cart existion
+    if (isExistionShoppingCart) {
+      let existincartArray = JSON.parse(isExistionShoppingCart);
+      const existingName = existincartArray.map((item) => item.name);
+      if (existingName.includes(`${watch.name}`)) {
+        const increaseQuantity = existincartArray.map((item) => {
+          if (item.name === watch.name) {
+            const quantity = Number.parseInt(item.quantity);
+            item.quantity = quantity + 1;
+            return item;
+          } else {
+            return item;
+          }
+        });
+        existincartArray = [...increaseQuantity];
+      } else {
+        existincartArray.push(watch);
+      }
+
+      const convertToStringify = JSON.stringify(existincartArray);
+      setCart(existincartArray);
+      localStorage.setItem("cart", convertToStringify);
+    }
   };
 
   console.log(cart);

@@ -10,7 +10,11 @@ const Watch = ({ watch, handleBuyButton }) => {
       <p>{isSoldOut ? "Sold Out" : "Available"}</p>
       <p>Total Sold: {soldNumber}</p>
       <div>
-        <button onClick={() => handleBuyButton(watch)}>Buy</button>
+        <button
+          onClick={() => handleBuyButton({ name, price, brand, quantity: "1" })}
+        >
+          Buy
+        </button>
       </div>
     </div>
   );
