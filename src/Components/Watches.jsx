@@ -22,6 +22,12 @@ const Watches = () => {
     };
     loadData();
   }, []);
+  let selectedNumber = 0;
+  const isExistionShoppingCart = localStorage.getItem("cart");
+  if (isExistionShoppingCart) {
+    selectedNumber = JSON.parse(isExistionShoppingCart).length;
+  }
+  // set default value on setCart
   const handleBuyButton = (watch) => {
     //check data on local storage
     const isExistionShoppingCart = localStorage.getItem("cart");
@@ -59,11 +65,12 @@ const Watches = () => {
       localStorage.setItem("cart", convertToStringify);
     }
   };
-
-  console.log(cart);
   return (
     <div>
-      <h3>Watches: {watches.length}</h3>
+      <div>
+        <h3>Watches: {watches.length}</h3>
+        {selectedNumber ? <h3>Selected Items: {selectedNumber}</h3> : ""}
+      </div>
       <div
         style={{
           display: "grid",
