@@ -1,5 +1,4 @@
-const ShoppingItem = ({ product }) => {
-  console.log(product);
+const ShoppingItem = ({ product, deleteByClicking }) => {
   const { name, price, brand, quantity } = product;
   return (
     <div
@@ -15,6 +14,7 @@ const ShoppingItem = ({ product }) => {
       <p>Quantity: {quantity}</p>
       <p>Each Price: {price}</p>
       <p>Total Price: {Number.parseInt(quantity) * Number.parseInt(price)}</p>
+      <button onClick={() => deleteByClicking(product)}>Delete Item</button>
     </div>
   );
 };
